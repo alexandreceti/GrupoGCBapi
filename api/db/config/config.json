@@ -1,0 +1,8 @@
+{
+  "username": "alexandre",
+  "password": "123456789",
+  "database": "doctors",
+  "host": "mysqldb",
+  "dialect": "mysql",
+  "seederStorage": "sequelize"
+}
