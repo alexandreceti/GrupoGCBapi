@@ -1,0 +1,18 @@
+@import './colors.scss';
+
+$primary: $app-green;
+$link: $app-black;
+
+@import 'bulma/bulma';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif
+};
+
+.listCities {
+  max-height: calc(100vh - 205px);
+  overflow-y: auto;
+};

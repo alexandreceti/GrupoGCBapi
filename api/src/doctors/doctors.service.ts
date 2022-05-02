@@ -34,7 +34,7 @@ export class DoctorsService {
           return specialty;
         }),
       );
-      console.log(specialties);
+
       await doctor.$set('Specialties', specialties);
       return doctor;
     } catch (error) {
@@ -43,9 +43,6 @@ export class DoctorsService {
   }
 
   async findAll() {
-    // const buscacep = await cepHander('31255190');
-    // console.log(buscacep);
-    // include: Specialty,
     return this.doctorModel.findAll({
       // attributes: ['id', 'name', 'CRM', 'CEP', 'phone', 'cell'],
       include: { model: Specialty, through: { attributes: [] } },
@@ -53,15 +50,12 @@ export class DoctorsService {
   }
 
   async findOne(id: string) {
-    // rejetcOnEmpty: true
-    // console.log(id);
     try {
       return await this.doctorModel.findByPk(id, {
         include: { model: Specialty, through: { attributes: [] } },
         rejectOnEmpty: true,
       });
     } catch (error) {
-      // console.log('erroo..............');
       throw new NotFoundException(error.message);
     }
   }
@@ -96,6 +90,5 @@ export class DoctorsService {
       rejectOnEmpty: true,
     });
     return doctor.destroy();
-    // return ;
   }
 }
