@@ -14,6 +14,7 @@ import { DoctorSpecialties } from './doctorSpecialties.entity';
 @Table({
   tableName: 'doctors',
   paranoid: true,
+  timestamps: true,
 })
 export class Doctor extends Model {
   @PrimaryKey
@@ -79,6 +80,12 @@ export class Doctor extends Model {
     allowNull: false,
   })
   CEP: string;
+
+  @Column({
+    type: DataType.DATE(),
+    allowNull: true,
+  })
+  deletedAt?: Date;
 
   @BelongsToMany(() => Specialty, () => DoctorSpecialties)
   Specialties: Specialty[];

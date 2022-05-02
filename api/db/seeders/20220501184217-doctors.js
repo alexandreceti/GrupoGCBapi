@@ -17,7 +17,6 @@ module.exports = {
           district: 'Bom Jesus',
           locality: 'Contagem',
           state: 'MG',
-          updatedAt: new Date(),
           createdAt: new Date(),
         },
         {
@@ -32,7 +31,6 @@ module.exports = {
           district: 'São Francisco',
           locality: 'Belo Horizonte',
           state: 'MG',
-          updatedAt: new Date(),
           createdAt: new Date(),
         },
       ],
