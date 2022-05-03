@@ -2,10 +2,11 @@ FROM node:16.14.0-alpine as build
 
 ENV NODE_ENV production
 
-USER node
 WORKDIR /home/app
-
+RUN chown -R node:node /home/app
 COPY --chown=node:node . .
+
+USER node
 
 RUN yarn install
 RUN yarn build
