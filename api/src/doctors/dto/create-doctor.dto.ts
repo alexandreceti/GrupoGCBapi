@@ -1,3 +1,6 @@
+import { Specialty } from './../../specialties/entities/specialty.entity';
+import { CreateSpecialtyDto } from './../../specialties/dto/create-specialty.dto';
+import { ApiProperty } from '@nestjs/swagger';
 import * as yup from 'yup';
 
 export const CreateDoctorSchema = yup.object({
@@ -10,10 +13,30 @@ export const CreateDoctorSchema = yup.object({
 });
 
 export class CreateDoctorDto {
+  @ApiProperty()
   name: string;
+
+  @ApiProperty()
   CRM: string;
+
+  @ApiProperty()
   phone: number;
+
+  @ApiProperty()
   cell: number;
+
+  @ApiProperty()
   CEP: string;
+
+  @ApiProperty({
+    type: 'array',
+    minItems: 2,
+    items: {
+      type: 'object',
+      properties: {
+        id: { type: 'string' },
+      },
+    },
+  })
   Specialties: [];
 }

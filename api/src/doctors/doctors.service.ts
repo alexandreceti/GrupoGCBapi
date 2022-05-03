@@ -9,6 +9,7 @@ import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 import { Doctor } from './entities/doctor.entity';
 import cepHander from 'src/util/cep.hander';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class DoctorsService {
@@ -42,10 +43,70 @@ export class DoctorsService {
     }
   }
 
-  async findAll() {
+  async findAll(search: string) {
+    // return this.doctorModel.findAll({
+    //   // attributes: ['id', 'name', 'CRM', 'CEP', 'phone', 'cell'],
+    //   include: { model: Specialty, through: { attributes: [] } },
+    // });
+    console.log(search);
+    if (!search) {
+      console.log('consulta sem search');
+      return this.doctorModel.findAll({
+        // attributes: ['id', 'name', 'CRM', 'CEP', 'phone', 'cell'],
+        include: { model: Specialty, through: { attributes: [] } },
+      });
+    }
+
     return this.doctorModel.findAll({
-      // attributes: ['id', 'name', 'CRM', 'CEP', 'phone', 'cell'],
-      include: { model: Specialty, through: { attributes: [] } },
+      where: {
+        [Op.or]: [
+          {
+            name: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+          {
+            CRM: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+          {
+            phone: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+          {
+            cell: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+          {
+            address: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+          {
+            district: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+          {
+            locality: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+          {
+            state: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+          {
+            CEP: {
+              [Op.like]: `%${search}%`,
+            },
+          },
+        ],
+      },
     });
   }
 

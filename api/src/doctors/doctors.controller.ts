@@ -10,24 +10,29 @@ import {
   HttpCode,
   UsePipes,
   ParseUUIDPipe,
+  Query,
 } from '@nestjs/common';
 import { DoctorsService } from './doctors.service';
 import { CreateDoctorDto, CreateDoctorSchema } from './dto/create-doctor.dto';
 import { UpdateDoctorDto, UpdateDoctorSchema } from './dto/update-doctor.dto';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { query } from 'express';
 
+@ApiTags('doctors')
 @Controller('doctors')
 export class DoctorsController {
   constructor(private readonly doctorsService: DoctorsService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Create Doctor' })
   @UsePipes(new YupValidationPipe(CreateDoctorSchema))
   async create(@Body() createDoctorDto: CreateDoctorDto) {
     return await this.doctorsService.create(createDoctorDto);
   }
 
   @Get()
-  findAll() {
-    return this.doctorsService.findAll();
+  findAll(@Query('search') search?: string) {
+    return this.doctorsService.findAll(search);
   }
 
   @Get(':id')
@@ -36,6 +41,7 @@ export class DoctorsController {
   }
 
   @Patch(':id')
+  @ApiBody({ type: UpdateDoctorDto })
   @UsePipes(new YupValidationPipe(UpdateDoctorSchema))
   async update(
     @Param('id', ParseUUIDPipe) id: string,
