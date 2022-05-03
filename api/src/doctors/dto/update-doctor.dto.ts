@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateDoctorDto } from './create-doctor.dto';
 
@@ -13,4 +14,42 @@ export const UpdateDoctorSchema = yup.object({
   Specialties: yup.array().optional().nullable().min(2),
 });
 
-export class UpdateDoctorDto extends PartialType(CreateDoctorDto) {}
+export class UpdateDoctorDto extends PartialType(CreateDoctorDto) {
+  @ApiProperty({
+    required: false,
+  })
+  name?: string;
+
+  @ApiProperty({
+    required: false,
+  })
+  CRM?: string;
+
+  @ApiProperty({
+    required: false,
+  })
+  phone?: number;
+
+  @ApiProperty({
+    required: false,
+  })
+  cell?: number;
+
+  @ApiProperty({
+    required: false,
+  })
+  CEP?: string;
+
+  @ApiProperty({
+    type: 'array',
+    required: false,
+    minItems: 2,
+    items: {
+      type: 'object',
+      properties: {
+        id: { type: 'string' },
+      },
+    },
+  })
+  Specialties?: [];
+}

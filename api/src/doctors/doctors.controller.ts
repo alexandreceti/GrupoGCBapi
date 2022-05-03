@@ -15,7 +15,13 @@ import {
 import { DoctorsService } from './doctors.service';
 import { CreateDoctorDto, CreateDoctorSchema } from './dto/create-doctor.dto';
 import { UpdateDoctorDto, UpdateDoctorSchema } from './dto/update-doctor.dto';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { query } from 'express';
 
 @ApiTags('doctors')
@@ -31,17 +37,25 @@ export class DoctorsController {
   }
 
   @Get()
-  findAll(@Query('search') search?: string) {
+  @ApiOperation({ summary: 'Find all Doctor' })
+  @ApiQuery({
+    name: 'search',
+    type: 'string',
+    description: 'Parameter search filter',
+    required: false,
+  })
+  findAll(@Query('search') search: string) {
     return this.doctorsService.findAll(search);
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Find one id Doctor' })
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.doctorsService.findOne(id);
   }
 
   @Patch(':id')
-  @ApiBody({ type: UpdateDoctorDto })
+  @ApiOperation({ summary: 'Update Doctor' })
   @UsePipes(new YupValidationPipe(UpdateDoctorSchema))
   async update(
     @Param('id', ParseUUIDPipe) id: string,
@@ -52,6 +66,7 @@ export class DoctorsController {
 
   @HttpCode(204)
   @Delete(':id')
+  @ApiOperation({ summary: 'Deleted Doctor' })
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.doctorsService.remove(id);
   }

@@ -26,13 +26,12 @@ import { SpecialtiesModule } from './specialties/specialties.module';
     DoctorsModule,
     SpecialtiesModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [
     // {
     //   provide: APP_FILTER,
     //   useClass: FiltroDeExcecaoHttp,
     // },
-    AppService,
   ],
 })
 export class AppModule {}

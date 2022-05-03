@@ -7,10 +7,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('teste Grupo GCB')
-    .setDescription('api de teste para vaga')
+    .setTitle('Teste Grupo GCB')
+    .setDescription('Api de teste para vaga')
     .setVersion('0.1')
-    .addTag('doctors')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

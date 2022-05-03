@@ -15,7 +15,7 @@ Descrição:
   - mysql executando na porta padrão 3306
   - phpmysql executando no endereço http://localhost:8081
 
-Arquivo insomnia para acesso as Rotas no repositorio.
+Arquivo insomnia para acesso às Rotas no repositório
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Api%20Doctors&uri=https%3A%2F%2Fraw.githubusercontent.com%2Falexandreceti%2FGrupoGCBapi%2Fmain%2FInsomnia.json)
 

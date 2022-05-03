@@ -3,8 +3,6 @@ import {
   BelongsToMany,
   Column,
   DataType,
-  HasAssociation,
-  HasMany,
   Model,
   PrimaryKey,
   Table,
