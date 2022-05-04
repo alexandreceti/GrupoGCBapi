@@ -12,7 +12,7 @@ export const DoctorSchema = yup.object({
   CRM: yup.string().required('Campo obrigatório').min(4, 'Minino de 4').max(7, 'Maximo de 7'),
   phone: yup.number('Campo somente numeros'),
   cell: yup.number('Campo somente numeros'),
-  CEP: yup.string().required('Campo obrigatório').min(9).max(9),
+  CEP: yup.string().matches(/(^[0-9]{5}-[0-9]{3})/, 'CEP no formato invalido exampelo: 31255-190.').required('Campo obrigatório').min(9).max(9),
   Specialties: yup.array().min(2, 'O campo de especialidades deve ter pelo menos 2 itens'),
 }).required();
 
@@ -88,24 +88,36 @@ function FormDoctor(props) {
               <label className="label">CRM</label>
               <div className="control">
                 <input className={(errors.CRM?.message)? 'input is-danger': 'input' } {...register("CRM")} type="text" placeholder="CRM do Medico" />
+                {(errors.CRM?.message)? (
+                <p className="help is-danger">{errors.CRM?.message}</p>
+                ) : null}
               </div>
             </div>
             <div className="field">
               <label className="label">Telefone</label>
               <div className="control">
                 <input className={(errors.phone?.message)? 'input is-danger': 'input' } {...register("phone")} type="number" placeholder="Telefone apenas numeros" />
+                {(errors.phone?.message)? (
+                <p className="help is-danger">{errors.phone?.message}</p>
+                ) : null}
               </div>
             </div>
             <div className="field">
               <label className="label">Celular</label>
               <div className="control">
                 <input className={(errors.cell?.message)? 'input is-danger': 'input' } {...register("cell")} type="number" placeholder="Celular apenas numeros" />
+                {(errors.cell?.message)? (
+                <p className="help is-danger">{errors.cell?.message}</p>
+                ) : null}
               </div>
             </div>
             <div className="field">
               <label className="label">CEP</label>
               <div className="control">
                 <input className={(errors.CEP?.message)? 'input is-danger': 'input' } {...register("CEP")} type="text" placeholder="CEP exemplo 31255-190" />
+                {(errors.CEP?.message)? (
+                <p className="help is-danger">{errors.CEP?.message}</p>
+                ) : null}
               </div>
             </div>
           </div>

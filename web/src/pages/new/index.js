@@ -19,7 +19,7 @@ export default function NewDoctor() {
     <div className='containner pt-3'>
         <h1 className="title">Cadastro de Novo Médico</h1>
         <div>
-        {(specialties[0]?.id)? (<FormDoctor doctor={{}} specialties={specialties} />): null}
+        {(specialties?.length > 1)? (<FormDoctor doctor={{}} specialties={specialties} />): null}
         </div>
     </div>
   )
